@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex justify-center items-center min-h-screen ">
+    <div class="w-full flex justify-center items-center  ">
         <div class="flex flex-col gap-3 items-center">
             <h1 class="text-white md:text-7xl text-5xl text-center font-semibold">Our Journey Together</h1>
             <h2 class="text-white text-xl text-center pt-1 pb-4">Austyn & Elina</h2>
@@ -33,8 +33,8 @@
                     </div>
                 </div>
             </div>
-            <div id="quote-of-the-day" class="text-white  italic ">
-                Quote of the day
+            <div id="quote-of-the-day" class="text-white italic text-center mx-5">
+                "{{ currentQuote.quote }}" - {{ currentQuote.author }} 
             </div>
         </div>
     </div>
@@ -42,7 +42,11 @@
 
 <script setup lang="ts">
     import {ref, onMounted, onUnmounted } from "vue"
-
+    import Quotes from '../storage/quotes.json'
+    let currentQuote = ref ({
+        quote: "", 
+        author: ""
+    })
     const targetDate = new Date('2025-01-09'); // Replace with your target date
     const days = ref(0);
     const hours = ref(0);
@@ -67,14 +71,24 @@
       }
     }
 
-    let intervalId;
+    let intervalId: number;
     onMounted(() => {
       updateCountdown();
       intervalId = setInterval(updateCountdown, 1000);
+      getQuote()
     });
 
     onUnmounted(() => {
       clearInterval(intervalId);
     });
+
+    function getQuote() {
+        //pull a random quote from the json 
+        const quotes = Quotes.Quotes
+        const num = Math.floor(Math.random() * (quotes.length - 1))
+      
+        currentQuote.value.quote = quotes[num].quote
+        currentQuote.value.author = quotes[num].author
+    }
 
 </script>

@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import Landing from "../src/components/Landing.vue"
+import Navbar from "./components/Navbar.vue";
 
 </script>
 
 <template>
-  <Landing class="w-full h-full"/>
+  <div class="flex flex-col  min-h-screen">
+    <Navbar class=""></Navbar>
+    <RouterView class="flex-1"/>
+  </div>
 </template>
 
 <style>
+html {
+  height: 100%
+}
+
 body {
   margin: 0;
   height: 100vh;
