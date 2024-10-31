@@ -71,7 +71,7 @@
       }
     }
 
-    let intervalId: number;
+    let intervalId: any;
     onMounted(() => {
       updateCountdown();
       intervalId = setInterval(updateCountdown, 1000);
