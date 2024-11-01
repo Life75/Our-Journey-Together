@@ -77,7 +77,7 @@
       updateCountdown();
       intervalId = setInterval(updateCountdown, 1000);
       getQuote()
-      quoteInterval = setInterval(getQuote, 7000)
+      quoteInterval = setInterval(getQuote, 8000)
     });
 
     onUnmounted(() => {
