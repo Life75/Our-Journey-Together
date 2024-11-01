@@ -33,9 +33,9 @@
                     </div>
                 </div>
             </div>
-            <div id="quote-of-the-day" class="text-white italic text-center mx-5">
-                "{{ currentQuote.quote }}" - {{ currentQuote.author }} 
-            </div>
+            <Transition name="fade" mode="out-in" id="quote-of-the-day" class="text-white italic text-center mx-5">
+                <p :key="currentQuote.quote">"{{ currentQuote.quote }}" - {{ currentQuote.author }}</p>
+            </Transition>
         </div>
     </div>
 </template>
@@ -72,15 +72,19 @@
     }
 
     let intervalId: any;
+    let quoteInterval: any;
     onMounted(() => {
       updateCountdown();
       intervalId = setInterval(updateCountdown, 1000);
       getQuote()
+      quoteInterval = setInterval(getQuote, 7000)
     });
 
     onUnmounted(() => {
       clearInterval(intervalId);
+      clearInterval(quoteInterval)
     });
+
 
     function getQuote() {
         //pull a random quote from the json 
@@ -92,3 +96,15 @@
     }
 
 </script>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
